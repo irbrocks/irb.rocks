@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>Comparison of arrays in Ruby</title>
+  <meta name="description" content="There are different ways to work with arrays in Ruby. If you want to compare arrays, there are several methods: include?, index..." />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="shortcut icon" href="../assets/images/favicon.ico%3Fv=cf909d7305">
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="../assets/images/apple-touch-icon-57x57.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/images/apple-touch-icon-114x114.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/images/apple-touch-icon-72x72.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/images/apple-touch-icon-144x144.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="../assets/images/apple-touch-icon-60x60.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../assets/images/apple-touch-icon-120x120.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../assets/images/apple-touch-icon-76x76.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../assets/images/apple-touch-icon-152x152.png%3Fv=cf909d7305" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-196x196.png%3Fv=cf909d7305" sizes="196x196" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-96x96.png%3Fv=cf909d7305" sizes="96x96" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-32x32.png%3Fv=cf909d7305" sizes="32x32" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-16x16.png%3Fv=cf909d7305" sizes="16x16" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-128.png%3Fv=cf909d7305" sizes="128x128" />
+
+  <link rel="stylesheet" type="text/css" href="../assets/css/irb.rocks.min.css%3Fv=cf909d7305.css" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,700,400|PT+Serif" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/zenburn.css%3Fv=cf909d7305.css" />
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="../assets/js/highlight.pack.js%3Fv=cf909d7305"></script>
+
+  <link rel="canonical" href="" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/" />
+
+    <meta property="og:site_name" content="IRB Rocks!" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Comparison of arrays in Ruby" />
+    <meta property="og:description" content="There are different ways to work with arrays in Ruby. If you want to compare arrays, there are several methods: include?, index..." />
+    <meta property="og:url" content="http://irb.rocks/comparison-arrays-ruby/" />
+    <meta property="article:published_time" content="2015-07-28T18:46:57.000Z" />
+    <meta property="article:modified_time" content="2015-07-28T18:47:14.000Z" />
+    <meta property="article:tag" content="Ruby" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Comparison of arrays in Ruby" />
+    <meta name="twitter:description" content="There are different ways to work with arrays in Ruby. If you want to compare arrays, there are several methods: include?, index..." />
+    <meta name="twitter:url" content="http://irb.rocks/comparison-arrays-ruby/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Angel M" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Ruby" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "IRB Rocks!",
+        "logo": "http://irb.rocks/content/images/2016/04/irbrocks-1.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Angel M",
+        "image": "//www.gravatar.com/avatar/73f55f92af57327a909da02fd88ac4d0?s=250&d=mm&r=x",
+        "url": "http://irb.rocks/author/angel/",
+        "sameAs": [],
+        "description": "I&#x27;m Ángel. UX newbie, I write about that on laux. I&#x27;m developing a lot of projects in my spare time. In my work, I make awesome things at Bitnami ;)"
+    },
+    "headline": "Comparison of arrays in Ruby",
+    "url": "http://irb.rocks/comparison-arrays-ruby/",
+    "datePublished": "2015-07-28T18:46:57.000Z",
+    "dateModified": "2015-07-28T18:47:14.000Z",
+    "keywords": "Ruby",
+    "description": "There are different ways to work with arrays in Ruby. If you want to compare arrays, there are several methods: include?, index...",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://irb.rocks"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.11" />
+    <link rel="alternate" type="application/rss+xml" title="IRB Rocks!" href="../rss/" />
+</head>
+<body class="post-template tag-ruby nav-closed">
+  <header class="clearfix">
+      <div class="blog-logo">
+        <a href="../">
+          <img src="../content/images/2016/04/irbrocks-1.png" alt="IRB Rocks!" />
+        </a>
+      </div>
+    <div class="blog-info">
+      <h1 class="blog-title"><a href="../">IRB Rocks!</a></h1>
+      <h2 class="blog-description"># Hack your code</h2>
+    </div>
+    <ul class="nav">
+    <li class="nav-home" role="presentation"><a href="../">Home</a></li>
+</ul>
+  </header>
+  <div class="wrapper">
+
+<main id="content" class="content post-content" role="main">
+  <article class="post post tag-ruby">
+    <div class="post-header">
+      <h1 class="post-title">Comparison of arrays in Ruby</h1>
+      <section class="post-meta">
+        # <time class="post-date" datetime="2015-07-28">28 July 2015</time>  on <a href="../tag/ruby/">Ruby</a>
+      </section>
+    </div>
+
+    <section class="post-content">
+      <p>This morning I was working with arrays on Ruby 2.1.2. I have compiled for you different ways to compare arrays with others arrays or values.</p>
+
+<h1 id="comparingvalues">Comparing values</h1>
+
+<p>We can use <code>include?</code> to ask the array if it includes a value in its elements. This method return <em>true</em> or <em>false</em></p>
+
+<pre><code class="language-ruby">a = ["a","b","c"]
+a.include? "a"         # true
+</code></pre>
+
+<p>There an alternative, the <code>index</code> method. If the array contains the value, this method will return the index of value inside array. If the value doesn't exist, it will return <code>nil</code>.</p>
+
+<pre><code class="language-ruby">a = ["a","b","c"]
+a.index "z"         # nil
+</code></pre>
+
+<p><strong>First method is better, but <code>index</code> can be useful in some situations.</strong></p>
+
+<h1 id="comparingtwoarrays">Comparing two arrays</h1>
+
+<p>When we want to compare two arrays the method to use isn't direct. <strong>To compare them we can use basic and binary operators</strong>.</p>
+
+<h2 id="coincidenceofsomevalue">Coincidence of some value</h2>
+
+<p>A way to check if a some value of an array is contained in other is to use AND operator. This operator get the intersection of two arrays, so if there are a coincidence we will get a non empty array.</p>
+
+<pre><code class="language-ruby">A = ["a","b","c"]
+B = ["c","d","e"]
+C = A &amp; B
+# C = ["c"]
+</code></pre>
+
+<p>We can use this in conditionals:</p>
+
+<pre><code class="language-ruby">C.empty?
+# If true, there are a coincidence of values between A and B
+</code></pre>
+
+<h2 id="inclusionofarrays">Inclusion of arrays</h2>
+
+<p>To do this job, the best operator is <em>subtract</em>. If an array (A) is contained in other (B), the result will be an empty array:</p>
+
+<pre><code class="language-ruby">A = [1, 2]
+B = [1, 2, 3]
+
+(A - B).empty?
+# true, so A is contained on B
+</code></pre>
+
+<p>An alternative is to use AND operator. If the intersection has same size of B, A is included:</p>
+
+<pre><code class="language-ruby">(A &amp; B).size == B.size
+# true, so A is included in B
+</code></pre>
+
+<p><em>This article was published in my another blog: <a href="https://laux.es/comparacion-de-arrays-con-ruby/">laux.es</a> (Spanish)</em></p>
+    </section>
+
+    <section class="post-share">
+      <h4>gem share <span class="share-title">Comparison of arrays in Ruby</span>.gem</h4>
+      <div class="social">
+        <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Comparison%20of%20arrays%20in%20Ruby&amp;url=http://irb.rocks/comparison-arrays-ruby/"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <span class="hidden">Twitter</span>
+        </a>
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://irb.rocks/comparison-arrays-ruby/"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+        </a>
+        <a class="icon-googleplus" href="https://plus.google.com/share?url=http://irb.rocks/comparison-arrays-ruby/"
+        onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="post-footer">
+        <section class="post-author">
+          <p class="comment"># puts "This was an article of <a href="../author/angel/">Angel M</a>"</p>
+        </section>
+      <p class="comment"># next</p>
+
+      <section class="post-other-articles clearfix">
+          <div class="post-other">
+            <h2><a href="../living-outside-rails/">Living outside Rails</a> <time datetime="2015-08-01"><b>#</b> next</h2>
+          </div>
+          <div class="post-other">
+            <h2><a href="../colorize-rails-unit-tests/">Colorize Rails unit tests</a> <time datetime="2015-07-23"><b>#</b> previous</h2>
+          </div>
+      </section>
+
+    </div>
+  </article>
+
+</main>
+
+<script type="text/javascript">
+// Update the name of the "gem" :P
+$(document).ready(function(){
+  var share = $('.share-title');
+  share.text(share.text().toLowerCase().replace(/\s/g, '_'));
+});
+</script>
+
+
+    <footer class="footer">
+  <div class="ruby-icon">
+    <img src="../assets/images/ruby.png%3Fv=cf909d7305"/>
+  </div>
+  <section class="credits">
+    <a href="../">IRB Rocks!</a> &copy; 2017. <a href="https://github.com/irbrocks/theme">Open Source Theme</a></section>
+  </section>
+  <section class="social">
+    <a href="https://twitter.com/irbrocks" target="_blank">Twitter</a> /
+    <a href="https://github.com/irbrocks" target="_blank">Github</a> /
+    <a href="https://es.linkedin.com/pub/ángel-maría-de-miguel-meana/60/974/9b6
+" target="_blank">Linkedin</a>
+  </section>
+</footer>  </div>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47913999-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  <script type="text/javascript" src="../assets/js/irb.rocks.js%3Fv=cf909d7305"></script>
+  <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

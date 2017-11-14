@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[IRB Rocks!]]></title><description><![CDATA[# Hack your code]]></description><link>http://irb.rocks/</link><generator>Ghost 0.11</generator><lastBuildDate>Sun, 14 May 2017 18:01:29 GMT</lastBuildDate><atom:link href="http://irb.rocks/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Optimizing your Webpack builds]]></title><description><![CDATA[Webpack is the new must-have tool for Frontend developers. Learn how we reduced the build time from 20s to 5s and the rebuild time from 4s to 400ms]]></description><link>http://irb.rocks/optimizing-your-webpack-builds/</link><guid isPermaLink="false">c42dde0a-a07c-4624-bc63-a7ea7b36c804</guid><category><![CDATA[Frontend]]></category><category><![CDATA[React]]></category><category><![CDATA[Webpack]]></category><dc:creator><![CDATA[Angel M]]></dc:creator><pubDate>Fri, 18 Nov 2016 10:27:06 GMT</pubDate><media:content url="http://irb.rocks/content/images/2016/11/optimizing-webpack.png" medium="image"/><content:encoded><![CDATA[<img src="http://irb.rocks/content/images/2016/11/optimizing-webpack.png" alt="Optimizing your Webpack builds"><p><a href="http://webpack.github.io/">Webpack</a> is the new must-have tool for Frontend developers. <strong>It offers a lot of common and complex features through a single configuration file</strong>. However, it's not trivial to create and manage that file.</p>
+
+<p>The build process can be really slow if we don't optimizing it. You can read how we <strong>reduced the build time from 20s to 5s and the rebuild time from 4s to 400ms</strong> in the <a href="https://engineering.bitnami.com/2016/11/15/optimizing-your-webpack-builds.html">Bitnami Engineering blog</a>.</p>
+
+<p style="font-size: 1.7em; text-align: center">Full article: <a href="https://engineering.bitnami.com/2016/11/15/optimizing-your-webpack-builds.html">Optimizing your webpack builds</a></p>]]></content:encoded></item><item><title><![CDATA[Create a secrets.yml file dynamically with bash]]></title><description><![CDATA[Every `Rails` application needs its own `secrets.yml` file to work. I've created a simple bash script to create a new `secrets.yml` for every user.]]></description><link>http://irb.rocks/create-secrets-yml-file-dynamically-with-bash/</link><guid isPermaLink="false">a0e5558c-75e9-4900-9956-b1c6cd93ea17</guid><category><![CDATA[Rails]]></category><category><![CDATA[Toolbox]]></category><category><![CDATA[Scripting]]></category><dc:creator><![CDATA[Angel M]]></dc:creator><pubDate>Sun, 21 Aug 2016 08:15:00 GMT</pubDate><media:content url="http://irb.rocks/content/images/2016/08/Captura-de-pantalla-2016-08-21-a-las-11-00-45.png" medium="image"/><content:encoded><![CDATA[<img src="http://irb.rocks/content/images/2016/08/Captura-de-pantalla-2016-08-21-a-las-11-00-45.png" alt="Create a secrets.yml file dynamically with bash"><p>Every <code>Rails</code> application needs its own <code>secrets.yml</code> file to work. When you distribute an application, you have two options to deal with this file:</p>
+
+<ul>
+<li>To keep it in the repository and share the development and test key with other users. If you share your production key a kitty will die 😢.</li>
+<li>To include a <code>secrets.example.yml</code> file and force the user to copy it and generate the secret tokens.</li>
+</ul>
+
+<p>However, in projects I use <code>docker</code>, I want the user only should run <code>docker-compose up -d</code> to setup the environment. In this case, I can use the first approach and keep the file in the repository.</p>
+
+<p>I think there is a better choice, and it's to generate that file on the first boot dynamically. I've created a simple bash script to create a new <code>secrets.yml</code> for every user. You only need to add it in your entrypoint script:</p>
+
+<pre><code class="language-bash">#!/bin/bash
+
+if [ ! -f ./config/secrets.yml ]; then  
+  echo -e "\nGenerating a secrets.yml file"
+
+  # Random Keys
+  KEY_DEV=$(bin/rake secret)
+  KEY_TEST=$(bin/rake secret)
+
+  # Generate the file
+  cat &gt; ./config/secrets.yml &lt;&lt;EOL
+development:  
+  secret_key_base: ${KEY_DEV}
+
+test:  
+  secret_key_ba se: ${KEY_TEST}
+
+production:  
+  secret_key_base: &lt;%= ENV["SECRET_KEY_BASE"] %&gt;
+EOL  
+fi  
+</code></pre>
+
+<p>It will generate a file like this:</p>
+
+<pre><code>development:  
+  secret_key_base: ccfbe0e981877fdf63875565...
+
+test:  
+  secret_key_base: b01fece76bfdfa613fc19ae4...
+
+production:  
+  secret_key_base: &lt;%= ENV["SECRET_KEY_BASE"] %&gt;
+</code></pre>
+
+<p>Check my <a href="https://github.com/Angelmmiguel/docker-rails5-react-redux-boilerplate">Docker + Rails5 API + React + Redux boilerplate</a> for a real example.</p>]]></content:encoded></item><item><title><![CDATA[Assignments in conditionals]]></title><description><![CDATA[<h1 id="assignmentsinconditionals">Assignments in conditionals</h1>
+
+<p>In Ruby, we can assign a value to a variable in a conditional. For example:</p>
+
+<pre><code class="language-ruby">if v = foo  
+  puts v
+end  
+</code></pre>
+
+<p>When we write this code, <a href="https://github.com/bbatsov/rubocop">Rubocop</a> show us a warning: <em>Assignment in condition - you probably meant to use ==</em>. This is not an error and it's</p>]]></description><link>http://irb.rocks/assignments-in-conditionals/</link><guid isPermaLink="false">dea078a4-9503-446d-ac95-49c1fd961861</guid><category><![CDATA[Ruby]]></category><dc:creator><![CDATA[Angel M]]></dc:creator><pubDate>Wed, 20 Apr 2016 10:21:25 GMT</pubDate><content:encoded><![CDATA[<h1 id="assignmentsinconditionals">Assignments in conditionals</h1>
+
+<p>In Ruby, we can assign a value to a variable in a conditional. For example:</p>
+
+<pre><code class="language-ruby">if v = foo  
+  puts v
+end  
+</code></pre>
+
+<p>When we write this code, <a href="https://github.com/bbatsov/rubocop">Rubocop</a> show us a warning: <em>Assignment in condition - you probably meant to use ==</em>. This is not an error and it's perfect valid in Ruby, but Rubocop tells you <strong>that it could be an error</strong> because <code>v = foo</code> is pretty similar to <code>v == foo</code>.</p>
+
+<p>To pass Rubocop checks and prevent mistakes, you can write the following valid code:</p>
+
+<pre><code class="language-ruby">if (v = foo)  
+  puts v
+end  
+</code></pre>]]></content:encoded></item><item><title><![CDATA[ReactJS, V of MVC]]></title><description><![CDATA[<p>A lot of companies are using <a href="https://facebook.github.io/react/">ReactJS</a>, an Open Source project of <a href="https://facebook.github.io/">Facebook</a>. As project's page says:</p>
+
+<blockquote>
+  <p>ReactJS, a javascript library for building user interfaces.</p>
+</blockquote>
+
+<p>Atom, Airbnb, Facebook, Atlassian, Codeacademy, Dropbox, Docker... and the <a href="https://github.com/facebook/react/wiki/Sites-Using-React">list</a> doesn't finish. But, what is the secret of ReactJS?</p>
+
+<ul>
+<li><strong>It can be adapted to existing</strong></li></ul>]]></description><link>http://irb.rocks/reactjs-v-of-mvc/</link><guid isPermaLink="false">ed6f1ab8-ed02-467f-9802-3a8df33f9a42</guid><category><![CDATA[Rails]]></category><dc:creator><![CDATA[Angel M]]></dc:creator><pubDate>Wed, 23 Mar 2016 12:12:27 GMT</pubDate><media:content url="http://irb.rocks/content/images/2016/03/react.png" medium="image"/><content:encoded><![CDATA[<img src="http://irb.rocks/content/images/2016/03/react.png" alt="ReactJS, V of MVC"><p>A lot of companies are using <a href="https://facebook.github.io/react/">ReactJS</a>, an Open Source project of <a href="https://facebook.github.io/">Facebook</a>. As project's page says:</p>
+
+<blockquote>
+  <p>ReactJS, a javascript library for building user interfaces.</p>
+</blockquote>
+
+<p>Atom, Airbnb, Facebook, Atlassian, Codeacademy, Dropbox, Docker... and the <a href="https://github.com/facebook/react/wiki/Sites-Using-React">list</a> doesn't finish. But, what is the secret of ReactJS?</p>
+
+<ul>
+<li><strong>It can be adapted to existing projects</strong>. Another UI frameworks need to change or duplicate logic in our apps.</li>
+<li>It's <strong>reactive</strong>. When data changes, UI changes too.</li>
+<li>The code is <strong>reusable</strong>. ReactJS builds the interface based on small components that can be recycled.</li>
+<li>It's <strong>"faster"</strong>. That's all people say, but I want to check it ;).</li>
+</ul>
+
+<h1 id="goctupusmeetsreactjs">Goctupus meets ReactJS</h1>
+
+<p>I'm learning ReactJS and the best way to learn is reading and applying the concepts to a real project. <a href="https://goctupus.com">Goctupus</a> is a game server status tracker made with Rails. Now, it's a simple application, so I think is the perfect candidate to start with ReactJS.</p>
+
+<p>During these weeks, I will move Goctupus to ReactJS, and I want to share with you all conclusions of the process.</p>
+
+<p>If you are impatient to start with ReactJS, check the following links:</p>
+
+<ul>
+<li><a href="https://egghead.io/series/react-fundamentals">React fundamentals, 18 lessons course from egghead.io</a>. <strong>I recommend you these lessons to start with ReactJS</strong>.</li>
+<li><a href="http://blog.arkency.com/2014/07/why-we-use-react-js-in-our-rails-projects/">Why we use React.js in our Rails projects</a></li>
+<li><a href="https://www.youtube.com/watch?v=gMvvb6F8dgk">Evolution of Airbnb frontend</a></li>
+<li><a href="https://github.com/airbnb/javascript/tree/master/react">Airbnb ReactJS styleguide</a></li>
+</ul>]]></content:encoded></item><item><title><![CDATA[Installing troubled gems in Mac OS X]]></title><description><![CDATA[<p>Sometimes, installing a gem in Mac OS can be a hard work. I fought with dependencies and compilers, and those are the solutions I found:</p>
+
+<h1 id="nokogiri">Nokogiri</h1>
+
+<pre><code>brew install libxml2 libxslt libiconv  
+brew link libxml2 libxslt libiconv  
+xcode-select --install  
+gem install nokogiri -- --use-system-libraries  
+</code></pre>
+
+<h1 id="libv8">Libv8</h1>
+
+<pre><code>gem install libv8 -- --with-system-v8  
+</code></pre>
+
+<p>Reference:</p>]]></description><link>http://irb.rocks/installing-troubled-in-mac-os-x/</link><guid isPermaLink="false">6213720c-8685-4048-bf92-efc403eafa29</guid><category><![CDATA[Ruby]]></category><category><![CDATA[Rails]]></category><dc:creator><![CDATA[Angel M]]></dc:creator><pubDate>Tue, 01 Mar 2016 09:20:38 GMT</pubDate><content:encoded><![CDATA[<p>Sometimes, installing a gem in Mac OS can be a hard work. I fought with dependencies and compilers, and those are the solutions I found:</p>
+
+<h1 id="nokogiri">Nokogiri</h1>
+
+<pre><code>brew install libxml2 libxslt libiconv  
+brew link libxml2 libxslt libiconv  
+xcode-select --install  
+gem install nokogiri -- --use-system-libraries  
+</code></pre>
+
+<h1 id="libv8">Libv8</h1>
+
+<pre><code>gem install libv8 -- --with-system-v8  
+</code></pre>
+
+<p>Reference: <a href="http://stackoverflow.com/questions/19577759/installing-libv8-gem-on-os-x-10-9">StackOverflow</a></p>
+
+<h1 id="eventmachinetherubyracerpuma">EventMachine, TheRubyRacer, Puma...</h1>
+
+<pre><code>brew link --force openssl  
+</code></pre>
+
+<p>Reference: <a href="https://github.com/eventmachine/eventmachine/issues/643">Github</a></p>]]></content:encoded></item><item><title><![CDATA[Material Icons for Rails v2.0.1 is released]]></title><description><![CDATA[Using a font icon set is a nice option for the interface. These sets include a lot of icons in a file, so they usually will cover all needs of your projects]]></description><link>http://irb.rocks/material-icons-rails-2-0-1-is-released/</link><guid isPermaLink="false">adf15314-07bb-4938-b32e-e4be6c8cdcd8</guid><category><![CDATA[Rails]]></category><category><![CDATA[Gems]]></category><dc:creator><![CDATA[Angel M]]></dc:creator><pubDate>Fri, 29 Jan 2016 14:00:46 GMT</pubDate><media:content url="http://irb.rocks/content/images/2016/01/material.png" medium="image"/><content:encoded><![CDATA[<img src="http://irb.rocks/content/images/2016/01/material.png" alt="Material Icons for Rails v2.0.1 is released"><p><a href="https://github.com/Angelmmiguel/material_icons">Material Icons for Rails</a> is a Ruby gem to add <a href="https://github.com/google/material-design-icons">Google Material Icons</a> icon set for your Rails projects. Today I released <a href="https://rubygems.org/gems/material_icons">v2.0.1</a>, a minor version with the following changes:</p>
+
+<ul>
+<li>Fixed a conflict with style icon name and MaterialIcon style method <a href="https://github.com/Angelmmiguel/material_icons/issues/8">#8</a></li>
+</ul>]]></content:encoded></item><item><title><![CDATA[Execute sudo commands with Net::SSH]]></title><description><![CDATA[Net-SSH is a Ruby implementation of an SSH (protocol 2) client. With this gem, you can interact with remote servers and execute (sudo) commands]]></description><link>http://irb.rocks/execute-sudo-commands-with-net-ssh/</link><guid isPermaLink="false">6d2a8c64-a0ff-4cc3-83f8-5147df1b4b61</guid><category><![CDATA[Ruby]]></category><category><![CDATA[Gems]]></category><dc:creator><![CDATA[Angel M]]></dc:creator><pubDate>Thu, 21 Jan 2016 12:05:08 GMT</pubDate><media:content url="http://irb.rocks/content/images/2016/01/sudo.png" medium="image"/><content:encoded><![CDATA[<img src="http://irb.rocks/content/images/2016/01/sudo.png" alt="Execute sudo commands with Net::SSH"><p><a href="https://github.com/net-ssh/net-ssh">Net::SSH</a> is a Ruby implementation of an SSH (protocol 2) client. With this gem, you can interact with remote servers and execute commands. The features from <a href="https://github.com/net-ssh/net-ssh">README</a> are:</p>
+
+<ul>
+<li>Execute processes on remote servers and capture their output</li>
+<li>Run multiple processes in parallel over a single SSH connection</li>
+<li>Support for SSH subsystems</li>
+<li>Forward local and remote ports via an SSH connection</li>
+</ul>
+
+<h1 id="executecommands">Execute commands</h1>
+
+<p>Net::SSH is very easy to use, we only need to connect with the server using our authentication method and execute the command. For example:</p>
+
+<pre><code class="language-ruby">Net::SSH.start('host', 'user', password: "password") do |ssh|  
+  # Capture all stderr and stdout output from a remote process
+  output = ssh.exec!("hostname")
+  puts output
+end  
+</code></pre>
+
+<h1 id="sudocommands">Sudo commands</h1>
+
+<p>The best way to execute <code>sudo</code> commands is to add the SSH user into <code>sudoers</code> file with <code>NOPASSWD</code> policy. This action prevents they asking for the password, so you can execute them as <a href="http://irb.rocks/execute-sudo-commands-with-net-ssh/#executecommands">regular commands</a>. This is a <a href="https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file-on-ubuntu-and-centos">nice article</a> about sudoers and how to edit it.</p>
+
+<p>If you need to execute a <code>sudo</code> command and send the password, you will need to establish a <a href="https://net-ssh.github.io/ssh/v2/api/classes/Net/SSH/Connection/Channel.html">channel</a>. The following code executes a command as <code>sudo</code> and stores the output in <code>result</code>.</p>
+
+<pre><code class="language-ruby">result = ''  
+# Start SSH connection
+Net::SSH.start('host', 'user', password: "password") do |ssh|  
+  # Open a channel
+  channel = ssh.open_channel do |channel, success|
+    # Callback to receive data. It will read the
+    # data and store it in result var or
+    # send the password if it's required.
+    channel.on_data do |channel, data|
+      if data =~ /^\[sudo\] password for /
+        # Send the password
+        channel.send_data "#{@password}\n"
+      else
+        # Store the data
+        result += data.to_s
+      end
+    end
+    # Request a pseudo TTY
+    channel.request_pty
+    # Execute the command
+    channel.exec("sudo hostname")
+    # Wait for response
+    channel.wait
+  end
+  # Wait for opened channel
+  channel.wait
+end  
+</code></pre>
+
+<h3 id="notes">Notes</h3>
+
+<p>When you need to interact with the command line, you must have a <code>tty</code> available for the channel. If you don't request it with <code>channel.request_pty</code> method, the command will return:</p>
+
+<pre><code>sudo: no tty present and no askpass program specified  
+</code></pre>
+
+<p>Another important line is <code>channel.send_data "#{@password}\n"</code>. Don't forget to add <code>\n</code> at the end of the password string or the process think you don't finish the command and it will wait forever ;)</p>]]></content:encoded></item><item><title><![CDATA[Reduce nil verifications in nested hashes]]></title><description><![CDATA[<p>Rails provide us multiple methods to help developers and we are used to calling them, check the article <a href="http://irb.rocks/living-outside-rails/">Living outside Rails</a> for more info ;). <strong>To write Ruby scripts return us to the core language</strong>.</p>
+
+<p>Recently I work in a script to parse data from an external API. It returns data</p>]]></description><link>http://irb.rocks/reduce-nil-verifications-nested-hashes/</link><guid isPermaLink="false">7e68cc97-80bc-4d25-9767-f7871e610ca8</guid><category><![CDATA[Ruby]]></category><category><![CDATA[Toolbox]]></category><dc:creator><![CDATA[Angel M]]></dc:creator><pubDate>Fri, 15 Jan 2016 12:53:00 GMT</pubDate><media:content url="http://irb.rocks/content/images/2016/01/reduce.png" medium="image"/><content:encoded><![CDATA[<img src="http://irb.rocks/content/images/2016/01/reduce.png" alt="Reduce nil verifications in nested hashes"><p>Rails provide us multiple methods to help developers and we are used to calling them, check the article <a href="http://irb.rocks/living-outside-rails/">Living outside Rails</a> for more info ;). <strong>To write Ruby scripts return us to the core language</strong>.</p>
+
+<p>Recently I work in a script to parse data from an external API. It returns data in JSON format, but some keys are optional so my code is full of these conditionals:</p>
+
+<pre><code class="language-ruby">if res['user'] &amp;&amp; res['user']['avatar'] &amp;&amp; res['user']['avatar']['small_uri']  
+  avatar_uri = res['user']['avatar']['small_uri']
+else  
+  avatar_uri = nil
+end  
+</code></pre>
+
+<p><strong>I need to check every level in the hash response</strong>. This problem can be solved using <a href="http://ruby-doc.org/core-2.3.0_preview1/Hash.html#method-i-dig">Hash#dig</a>, but it's only available from Ruby 2.3.0.</p>
+
+<p>For older versions, I created a recursive method that return the value of the given path or nil.</p>
+
+<pre><code class="language-ruby">#
+# Check if a hash constains the path of keys.
+#
+# Example:
+# h = { a: { b: { c: 1 }}}
+#
+# dig h, :a, :b              # { c: 1 }
+# dig h, :a, :b, :c          # 1
+# dig h, :a, :b, :d          # nil
+# dig h, :a, :d              # nil
+# dig h, :a, :d, :c          # nil
+# dig h, :a, :b, :c, :d      # nil
+#
+# == Parameters:
+# hash::
+#   Hash to check.
+# keys::
+#   Array with the sequence of keys to get value
+#
+# == Returns:
+# Value of the key in the hash or nil
+#
+def dig(hash, *keys)  
+  if hash[keys.first] &amp;&amp; keys.size == 1
+    return hash[keys.first]
+  elsif hash[keys.first] &amp;&amp; hash[keys.first].is_a?(Hash)
+    dig(hash[keys.first], *keys[1..keys.size-1])
+  else
+    return nil
+  end
+end  
+</code></pre>
+
+<p>Using this method, the code to get <code>avatar_uri</code> from the API can be simplified to:</p>
+
+<pre><code class="language-ruby">avatar_uri = dig res, 'user', 'avatar', 'small_uri'  
+</code></pre>
+
+<h2 id="code">Code</h2>
+
+<p>You can grab the code in <a href="https://github.com/irbrocks/blog-sources/blob/master/reduce-nil-verifications-nested-hashes/hash_value.rb">Github</a> ;).</p>]]></content:encoded></item><item><title><![CDATA[Mathematical signs and method invocation in Ruby]]></title><description><![CDATA[Ruby is a flexible language. For example, parameters are optional in method invocation. Be careful with mathematical signs and methods with optional params.]]></description><link>http://irb.rocks/mathematical-signs-method-invocation-ruby/</link><guid isPermaLink="false">eb76e792-33a0-4638-9acc-f037ee8c97e3</guid><category><![CDATA[Ruby]]></category><dc:creator><![CDATA[Angel M]]></dc:creator><pubDate>Thu, 14 Jan 2016 16:14:00 GMT</pubDate><media:content url="http://irb.rocks/content/images/2016/01/math.png" medium="image"/><content:encoded><![CDATA[<img src="http://irb.rocks/content/images/2016/01/math.png" alt="Mathematical signs and method invocation in Ruby"><p><strong>Ruby is a flexible language</strong>. An example of this flexibility is the optional parenthesis on method invocation.</p>
+
+<pre><code class="language-ruby">result = my_method arg  
+# Same result
+result = my_method(arg)  
+</code></pre>
+
+<p><strong>A mistyping can change the behaviour of our code</strong>. In mathematical operations, the position of the signs doesn't affect the result:</p>
+
+<pre><code class="language-ruby"># The position of signs in mathematical operations doesn't affect the result
+1 + 1  # =&gt; 2  
+1+2    # =&gt; 3  
+5 -4   # =&gt; 1  
+</code></pre>
+
+<p>In the case of methods with optional parameters, <strong>Ruby interpreter call them based on the line syntax</strong>. If a method receives an optional parameter, the position of mathematical signs is important.</p>
+
+<pre><code class="language-ruby">def multiply(n = 1)  
+  n * 10
+end
+
+multiply      # =&gt; 10  
+multiply 2    # =&gt; 20  
+multiply -2   # =&gt; -20  
+# With an space...
+multiply - 2  # =&gt; 8  
+</code></pre>
+
+<p>Another example is <code>Date</code> class:</p>
+
+<pre><code class="language-ruby">require 'date'
+
+Date.today -5    # =&gt; #&lt;Date: 2016-01-14 ((2457402j,0s,0n),+0s,2299161j)&gt;  
+Date.today - 5   # =&gt; #&lt;Date: 2016-01-09 ((2457395j,0s,0n),+0s,2299161j)&gt;  
+</code></pre>
+
+<p><strong>Ruby doesn't like ambiguity</strong>. If you run a console with <code>-w</code> flag it will show some warnings:</p>
+
+<pre><code>(irb):2: warning: ambiguous first argument; put parentheses or even spaces
+</code></pre>
+
+<p>Remember, <strong>this is an expected behaviour and Ruby know it</strong>, but be careful when you use mathematical signs and methods in the same line or your code could perform a wrong operation.</p>
+
+<h2 id="reference">Reference</h2>
+
+<p>More info at <a href="https://bugs.ruby-lang.org/issues/11621">RubyLang issue 11621</a></p>]]></content:encoded></item><item><title><![CDATA[Remove all references in git stash]]></title><description><![CDATA[<p><code>git stash</code> is a powerful command from <code>git</code>. We can store current changes in a stack and recover them when we want. I usually stash some small changes and I never recover it so the stack grow very fast.</p>
+
+<p>If you want to clear all the stack, only execute:</p>
+
+<pre><code>git</code></pre>]]></description><link>http://irb.rocks/remove-all-references-git-stash/</link><guid isPermaLink="false">1a000489-32ab-477a-abbb-61439ba5d562</guid><category><![CDATA[Git]]></category><dc:creator><![CDATA[Angel M]]></dc:creator><pubDate>Wed, 13 Jan 2016 09:35:39 GMT</pubDate><media:content url="http://irb.rocks/content/images/2016/01/gitstash.png" medium="image"/><content:encoded><![CDATA[<img src="http://irb.rocks/content/images/2016/01/gitstash.png" alt="Remove all references in git stash"><p><code>git stash</code> is a powerful command from <code>git</code>. We can store current changes in a stack and recover them when we want. I usually stash some small changes and I never recover it so the stack grow very fast.</p>
+
+<p>If you want to clear all the stack, only execute:</p>
+
+<pre><code>git stash clear  
+</code></pre>
+
+<h2 id="reference">Reference</h2>
+
+<p>More info at <a href="https://git-scm.com/docs/git-stash">Git stash documentation</a>.</p>]]></content:encoded></item><item><title><![CDATA[Update timestamp of a model in Rails]]></title><description><![CDATA[Sometimes we need to update update_at value of a model. Rails provide us with a method to perform this task]]></description><link>http://irb.rocks/update-timestamp-of-a-model-rails/</link><guid isPermaLink="false">e7d0146f-8ffc-4d74-a498-e0ed47c78ca8</guid><category><![CDATA[Rails]]></category><dc:creator><![CDATA[Angel M]]></dc:creator><pubDate>Sat, 14 Nov 2015 11:39:42 GMT</pubDate><content:encoded><![CDATA[<p>Recently I need to update timestamps of a model because I use this value as "last seen". In a Job, I update a model or others associated to it, so in the second case, I need to update timestamps.</p>
+
+<p>Instead of use <code>model.update(update_at: Time.now)</code>, Rails provide us with <code>touch</code> method to perform this task:</p>
+
+<pre><code class="language-ruby"># Update update_at with current time
+model.touch  
+# Update last_seen 
+model.touch(:last_seen)  
+</code></pre>]]></content:encoded></item><item><title><![CDATA[Ruby safe operator]]></title><description><![CDATA[<h2 id="editedonjan14">Edited on Jan. 14</h2>
+
+<p>Finally, the safe operator was updated from <code>.?</code> to <code>&amp;.</code>. See this <a href="https://bugs.ruby-lang.org/issues/11537#note-42">comment</a> from <a href="https://twitter.com/yukihiro_matz">Matz</a>.</p>
+
+<h1 id="rubysafeoperator">Ruby Safe operator</h1>
+
+<p>Recently, I read in <a href="https://www.reddit.com/r/ruby/comments/3pr2gw/new_safe_navigation_operator/">reddit</a> about a new feature in next Ruby minor release: <a href="https://bugs.ruby-lang.org/issues/11537">Ruby Safe operator</a>. <code>&amp;.</code> is used to call a method of an Object that can</p>]]></description><link>http://irb.rocks/ruby-safe-operator/</link><guid isPermaLink="false">8c81ffd2-81f3-4ea7-bd38-e471d20c94b1</guid><category><![CDATA[Ruby]]></category><dc:creator><![CDATA[Angel M]]></dc:creator><pubDate>Mon, 26 Oct 2015 07:44:42 GMT</pubDate><media:content url="http://irb.rocks/content/images/2015/10/safe_operator.png" medium="image"/><content:encoded><![CDATA[<h2 id="editedonjan14">Edited on Jan. 14</h2>
+
+<img src="http://irb.rocks/content/images/2015/10/safe_operator.png" alt="Ruby safe operator"><p>Finally, the safe operator was updated from <code>.?</code> to <code>&amp;.</code>. See this <a href="https://bugs.ruby-lang.org/issues/11537#note-42">comment</a> from <a href="https://twitter.com/yukihiro_matz">Matz</a>.</p>
+
+<h1 id="rubysafeoperator">Ruby Safe operator</h1>
+
+<p>Recently, I read in <a href="https://www.reddit.com/r/ruby/comments/3pr2gw/new_safe_navigation_operator/">reddit</a> about a new feature in next Ruby minor release: <a href="https://bugs.ruby-lang.org/issues/11537">Ruby Safe operator</a>. <code>&amp;.</code> is used to call a method of an Object that can be <code>nil</code>. If the object is different of <code>nil</code> the method will be executed, in the other case, it returns <code>nil</code>.</p>
+
+<pre><code class="language-ruby">a = 'Hi!'  
+b = nil  
+# Using safe operator...
+a&amp;.upcase  
+# =&gt; HI!
+b&amp;.upcase  
+# =&gt; nil
+</code></pre>
+
+<p>This operator comes with the objective to reduce <code>nil</code> verification in our code:</p>
+
+<pre><code class="language-ruby">if user &amp;&amp; user.avatar &amp;&amp; user.avatar.url  
+  # ...
+end
+
+# Same code with &amp;. operator
+if user&amp;.avatar&amp;.url  
+  # ...
+end  
+</code></pre>
+
+<p>You can understand it as a native method equivalent to <code>try</code> included in <a href="https://github.com/rails/rails/tree/master/activesupport">ActiveSupport</a>.</p>
+
+<pre><code class="language-ruby">@variable&amp;.method
+# With ActiveSupport
+@variable.try(:method)
+</code></pre>
+
+<h1 id="nilnilnil">Nil nil nil</h1>
+
+<p>As people say in <a href="https://www.reddit.com/r/ruby/comments/3pr2gw/new_safe_navigation_operator/cw90huh">reddit</a>, excessive use of <code>nil</code> checking can come from a bad code design. <code>nil</code> dependency in our application is a bad idea because we always need to carry this verification over all the code, conditionals and <code>nil?</code> will be our best friends.</p>
+
+<p>In the other hands, other people defend "nil pattern". Some gems like <a href="https://github.com/raganwald/andand">andand</a> implement a similar functionality of <code>&amp;.</code>.</p>
+
+<p>I think the big problem is the abuse of this operator. There are many situations it very useful, for example, when working with external libraries and APIs.</p>
+
+<blockquote>
+  <p>It has an elegant syntax that is natural to read and easy to write</p>
+</blockquote>
+
+<p>This is an extract from Ruby slogan we can apply to <code>&amp;.</code> operator:</p>
+
+<pre><code class="language-ruby">json['errors'].map { |el| el['name'] } if json['errors']  
+# With new operator
+json['errors']&amp;.map { |el| el['name'] }  
+</code></pre>
+
+<p><code>&amp;.</code> is easy to read and simplify the code of our applications.</p>
+
+<h2 id="returnedvalues">Returned values</h2>
+
+<pre><code class="language-ruby">class MyString  
+  def emphasize(string)
+     string&amp;.upcase
+  end 
+end
+
+# In other file...
+my_string&amp;.emphasize(a_string)  
+# nil
+</code></pre>
+
+<p>The result of this code is <code>nil</code> but, where <code>nil</code> value comes? In this case <code>my_string</code> can be <code>nil</code>, but <code>a_string</code> can be too. <code>&amp;.</code> hides some logic of our code, so to use these variables in the following code can cause some problems.</p>
+
+<h2 id="nilobject">Nil Object</h2>
+
+<p>In Ruby all is an Object and <code>nil</code> is not an exception. Some methods  from Object class like <code>.nil?</code> get on with <code>&amp;.</code> operator, and this can be a problem in our code logic:</p>
+
+<p>Sometimes I see <code>.nil?</code> in conditionals to initialize a variable:</p>
+
+<pre><code class="language-ruby">@var = 'A variable' if @var.nil?
+</code></pre>
+
+<p>But what happen if we use  <code>&amp;.</code> operator?</p>
+
+<pre><code class="language-ruby">@var = 'A variable' if @var&amp;.nil?
+</code></pre>
+
+<p>It's simple, <code>@var</code> never be initialized. You can tell me this is obvious, but it can be confused to new users of Ruby. Remember <code>nil</code> is not an exception of <code>&amp;.</code> operator.</p>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p><code>&amp;.</code> help us to keep cleaner our code but it can introduce some problems because the abuse of it hides some logic of our application. Especially, pay attention when you use <code>nil</code> as value in conditionals logic, <code>&amp;.</code> operator can swap executed code.</p>]]></content:encoded></item><item><title><![CDATA[Multiple assignment in Ruby]]></title><description><![CDATA[On Ruby we can assign multiple values to our variables. These assignments are very useful to reset variables and return multiple values from methods]]></description><link>http://irb.rocks/multiple-assignments-in-ruby/</link><guid isPermaLink="false">bd310f95-0642-41a9-937c-6741e46b0bef</guid><category><![CDATA[Ruby]]></category><dc:creator><![CDATA[Angel M]]></dc:creator><pubDate>Mon, 19 Oct 2015 20:58:10 GMT</pubDate><media:content url="http://irb.rocks/content/images/2015/10/assignments-1.png" medium="image"/><content:encoded><![CDATA[<img src="http://irb.rocks/content/images/2015/10/assignments-1.png" alt="Multiple assignment in Ruby"><p>On Ruby we can assign multiple values to our variables. These assignments are very useful to reset variables and return multiple values from methods.</p>
+
+<h1 id="multipleassignment">Multiple assignment</h1>
+
+<p>There are two ways to assign multiples values to variables:</p>
+
+<pre><code class="language-ruby"># First
+a, b = 1, 2  
+puts "#{a}, #{b}"  
+# 1, 2
+c, d = [3, 4]  
+puts "#{c}, #{d}"  
+# 3, 4
+</code></pre>
+
+<p>Two ways have same result, but second has a small advantage. If we want to assign same value to all variables, we can compress the code using the array:</p>
+
+<pre><code class="language-ruby">a, b, c, d = 'hi', 'hi', 'hi', 'hi'  
+# Now with arrays
+a, b, c, d = ['hi'] * 4  
+</code></pre>
+
+<h2 id="mutableobjects">Mutable objects</h2>
+
+<p>There are a third way to assign same value to multiple variables:</p>
+
+<pre><code class="language-ruby">a = b = 1  
+</code></pre>
+
+<p>This assignment has a big problem: <code>b</code> is initialized with <code>1</code> but <code>a</code> is equal to <code>b</code> object. In this case, we don't have problem because <code>Fixnum</code> is an inmutable class, like <code>nil</code>, so to change <code>a</code> doesn't affect to <code>b</code>.</p>
+
+<p>What happens when we assign a mutable value?</p>
+
+<pre><code class="language-ruby">a = b = 'hi'  
+puts "#{a}, #{b}"  
+# hi, hi
+a &lt;&lt; ' bye'  
+puts "#{a}, #{b}"  
+# hi bye, hi bye
+# Object reference
+puts "#{a.object_id} - #{b.object_id}"  
+# 2177648520 - 2177648520
+</code></pre>
+
+<p>We don't want this behaviour in our applications.</p>
+
+<h1 id="returnmultiplevaluesinmethod">Return multiple values in method</h1>
+
+<p>The secret to return multiples values in a method is to use an array as return object. Call the method and Assign the output of the method to the correct number of variables.</p>
+
+<pre><code class="language-ruby">def numbers  
+  [1, 2]
+end
+
+a, b = numbers  
+puts "#{a}, #{b}"  
+# 1, 2
+</code></pre>
+
+<p>Be careful with the number of variables when assign the output of a method, they can get an unexpected value:</p>
+
+<pre><code class="language-ruby">a = numbers  
+puts a  
+# [1, 2]
+a, b, c = numbers  
+puts "#{b}, #{c}"  
+# 2, nil
+</code></pre>]]></content:encoded></item><item><title><![CDATA[Material icons for Rails]]></title><description><![CDATA[Using a font icon set is a nice option for the interface. These sets include a lot of icons in a file, so they usually will cover all needs of your projects]]></description><link>http://irb.rocks/material-icons-for-rails/</link><guid isPermaLink="false">157eefe6-3781-4d90-9492-e62398a7768c</guid><category><![CDATA[Rails]]></category><category><![CDATA[Gems]]></category><dc:creator><![CDATA[Angel M]]></dc:creator><pubDate>Sat, 17 Oct 2015 17:59:25 GMT</pubDate><media:content url="http://irb.rocks/content/images/2015/10/material_icons-1.png" medium="image"/><content:encoded><![CDATA[<img src="http://irb.rocks/content/images/2015/10/material_icons-1.png" alt="Material icons for Rails"><p>Using a font icon set is a nice option for the interface of your websites and applications. These sets include a lot of icons in one file, so they usually will cover all needs of your projects.</p>
+
+<p>In addition, they have more advantages:</p>
+
+<ul>
+<li>Supported by all modern web browsers.</li>
+<li>Customized with CSS.</li>
+<li>Vector-based, they will look great at any screen.</li>
+</ul>
+
+<h1 id="materialicons">Material Icons</h1>
+
+<p>Google Material Icons is a +750 set of icons based on Material Design guidelines. It's a Open Source project with ~20K of stars. Check it at:</p>
+
+<ul>
+<li><a href="https://github.com/google/material-design-icons">Github Project</a></li>
+<li><a href="https://www.google.com/design/icons/">Icon list</a> (an alternative on <a href="http://www.materialup.com/tools/icons">MaterialUp</a>)</li>
+</ul>
+
+<h1 id="usetheminrails">Use them in Rails</h1>
+
+<p>To use this icon set in our Rails projects, I created a gem called <a href="https://github.com/Angelmmiguel/material_icons">Material Icons</a>. This gem add the assets to your project and include a helper to build icons in the interface.</p>
+
+<p>The helper provide multiple methods to set the icon, size, rotation, CSS classes... All methods are described in the <a href="https://github.com/Angelmmiguel/material_icons#helpers">README</a>. An example:</p>
+
+<pre><code class="language-ruby">&lt;%= material_icon.face.md_36 %&gt;  
+# &lt;i class="material-icons md-36"&gt;face&lt;/i&gt;
+</code></pre>
+
+<h1 id="compatibility">Compatibility</h1>
+
+<p>By default Material Icons use ligatures, but this CSS3 property is only available for:</p>
+
+<pre><code>Google Chrome       &gt;= 11  
+Mozilla Firefox     &gt;= 3.5  
+Apple Safari        &gt;= 5  
+Microsoft IE        &gt;= 10  
+Opera               &gt;= 15  
+Apple MobileSafari  &gt;= iOS 4.2  
+Android Browser     &gt;= 3  
+</code></pre>
+
+<p>The gem comes with another option: Unicode. You can switch between these two modes with a simple initializer, the helper will do the rest ;).</p>
+
+<h1 id="contribute">Contribute</h1>
+
+<p>Fell free to add issues and fork the project to improve it. </p>]]></content:encoded></item><item><title><![CDATA[Determine if model is just created]]></title><description><![CDATA[Sometimes we need to know if a model is just created after save if for first time. Rails doesn't provide a method, so we need to use a small trick]]></description><link>http://irb.rocks/determine-if-a-model-is-just-created/</link><guid isPermaLink="false">a9d8d08e-dbac-46fd-bce3-d18283e55743</guid><category><![CDATA[Rails]]></category><dc:creator><![CDATA[Angel M]]></dc:creator><pubDate>Fri, 16 Oct 2015 10:04:00 GMT</pubDate><content:encoded><![CDATA[<p>Sometimes we need to know if a model is just created after save if for first time. Rails doesn't provide a method to check this situation, so we need to use a small trick.</p>
+
+<p>If we have timestamps (specifically <code>created_at</code> and <code>update_at</code>) columns defined in this model, we can use it:</p>
+
+<pre><code class="language-ruby">class User &lt; ActiveRecord::Base
+
+  # ...
+
+  #
+  # Check if the current user is just created.
+  #
+  # == Returns:
+  # Boolean
+  #
+  def just_created?
+    created_at == updated_at
+  end
+end  
+</code></pre>
+
+<p>As you can see, I compare the date of creation and update. If we don't have these columns defined, we can     take advantage of <code>before_create</code> callback to check if our <code>User</code> is just created.</p>
+
+<pre><code class="language-ruby">class User &lt; ActiveRecord::Base
+
+  # ...
+
+  before_create :set_just_created
+
+  #
+  # Check if the current user is just created.
+  #
+  # == Returns:
+  # Boolean
+  #
+  def just_created?
+    @just_created || false
+  end
+
+  private
+
+  #
+  # Set a flag indicating this model is just created
+  #
+  def set_just_created
+    @just_created = true
+  end
+end  
+</code></pre>
+
+<p>Before create the <code>User</code>, I set the flag I will use.</p>
+
+<p>As usual, all the code is available in <a href="https://github.com/irbrocks/blog-sources/tree/master/determine-if-a-model-is-just-created">Github</a> ;).</p>]]></content:encoded></item></channel></rss>

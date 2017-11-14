@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>Ruby safe operator</title>
+  <meta name="description" content="" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="shortcut icon" href="../assets/images/favicon.ico%3Fv=cf909d7305">
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="../assets/images/apple-touch-icon-57x57.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/images/apple-touch-icon-114x114.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/images/apple-touch-icon-72x72.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/images/apple-touch-icon-144x144.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="../assets/images/apple-touch-icon-60x60.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../assets/images/apple-touch-icon-120x120.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../assets/images/apple-touch-icon-76x76.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../assets/images/apple-touch-icon-152x152.png%3Fv=cf909d7305" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-196x196.png%3Fv=cf909d7305" sizes="196x196" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-96x96.png%3Fv=cf909d7305" sizes="96x96" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-32x32.png%3Fv=cf909d7305" sizes="32x32" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-16x16.png%3Fv=cf909d7305" sizes="16x16" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-128.png%3Fv=cf909d7305" sizes="128x128" />
+
+  <link rel="stylesheet" type="text/css" href="../assets/css/irb.rocks.min.css%3Fv=cf909d7305.css" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,700,400|PT+Serif" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/zenburn.css%3Fv=cf909d7305.css" />
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="../assets/js/highlight.pack.js%3Fv=cf909d7305"></script>
+
+  <link rel="canonical" href="" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/" />
+
+    <meta property="og:site_name" content="IRB Rocks!" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Ruby safe operator" />
+    <meta property="og:description" content="Edited on Jan. 14 Finally, the safe operator was updated from .? to &amp;amp;.. See this comment from Matz. Ruby Safe operator Recently, I read in reddit about a new feature in next Ruby minor release: Ruby Safe operator. &amp;amp;. is used to call a method of an Object that can" />
+    <meta property="og:url" content="http://irb.rocks/ruby-safe-operator/" />
+    <meta property="og:image" content="http://irb.rocks/content/images/2015/10/safe_operator.png" />
+    <meta property="article:published_time" content="2015-10-26T07:44:42.000Z" />
+    <meta property="article:modified_time" content="2016-01-14T11:45:49.000Z" />
+    <meta property="article:tag" content="Ruby" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ruby safe operator" />
+    <meta name="twitter:description" content="Edited on Jan. 14 Finally, the safe operator was updated from .? to &amp;amp;.. See this comment from Matz. Ruby Safe operator Recently, I read in reddit about a new feature in next Ruby minor release: Ruby Safe operator. &amp;amp;. is used to call a method of an Object that can" />
+    <meta name="twitter:url" content="http://irb.rocks/ruby-safe-operator/" />
+    <meta name="twitter:image" content="http://irb.rocks/content/images/2015/10/safe_operator.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Angel M" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Ruby" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "IRB Rocks!",
+        "logo": "http://irb.rocks/content/images/2016/04/irbrocks-1.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Angel M",
+        "image": "//www.gravatar.com/avatar/73f55f92af57327a909da02fd88ac4d0?s=250&d=mm&r=x",
+        "url": "http://irb.rocks/author/angel/",
+        "sameAs": [],
+        "description": "I&#x27;m Ángel. UX newbie, I write about that on laux. I&#x27;m developing a lot of projects in my spare time. In my work, I make awesome things at Bitnami ;)"
+    },
+    "headline": "Ruby safe operator",
+    "url": "http://irb.rocks/ruby-safe-operator/",
+    "datePublished": "2015-10-26T07:44:42.000Z",
+    "dateModified": "2016-01-14T11:45:49.000Z",
+    "image": "http://irb.rocks/content/images/2015/10/safe_operator.png",
+    "keywords": "Ruby",
+    "description": "Edited on Jan. 14 Finally, the safe operator was updated from .? to &amp;amp;.. See this comment from Matz. Ruby Safe operator Recently, I read in reddit about a new feature in next Ruby minor release: Ruby Safe operator. &amp;amp;. is used to call a method of an Object that can",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://irb.rocks"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.11" />
+    <link rel="alternate" type="application/rss+xml" title="IRB Rocks!" href="../rss/" />
+</head>
+<body class="post-template tag-ruby nav-closed">
+  <header class="clearfix">
+      <div class="blog-logo">
+        <a href="../">
+          <img src="../content/images/2016/04/irbrocks-1.png" alt="IRB Rocks!" />
+        </a>
+      </div>
+    <div class="blog-info">
+      <h1 class="blog-title"><a href="../">IRB Rocks!</a></h1>
+      <h2 class="blog-description"># Hack your code</h2>
+    </div>
+    <ul class="nav">
+    <li class="nav-home" role="presentation"><a href="../">Home</a></li>
+</ul>
+  </header>
+  <div class="wrapper">
+
+<main id="content" class="content post-content" role="main">
+  <article class="post post tag-ruby">
+    <div class="post-header">
+      <h1 class="post-title">Ruby safe operator</h1>
+      <section class="post-meta">
+        # <time class="post-date" datetime="2015-10-26">26 October 2015</time>  on <a href="../tag/ruby/">Ruby</a>
+      </section>
+    </div>
+
+    <section class="post-content">
+        <p><img src="../content/images/2015/10/safe_operator.png" alt="Post image"/></p>
+      <h2 id="editedonjan14">Edited on Jan. 14</h2>
+
+<p>Finally, the safe operator was updated from <code>.?</code> to <code>&amp;.</code>. See this <a href="https://bugs.ruby-lang.org/issues/11537#note-42">comment</a> from <a href="https://twitter.com/yukihiro_matz">Matz</a>.</p>
+
+<h1 id="rubysafeoperator">Ruby Safe operator</h1>
+
+<p>Recently, I read in <a href="https://www.reddit.com/r/ruby/comments/3pr2gw/new_safe_navigation_operator/">reddit</a> about a new feature in next Ruby minor release: <a href="https://bugs.ruby-lang.org/issues/11537">Ruby Safe operator</a>. <code>&amp;.</code> is used to call a method of an Object that can be <code>nil</code>. If the object is different of <code>nil</code> the method will be executed, in the other case, it returns <code>nil</code>.</p>
+
+<pre><code class="language-ruby">a = 'Hi!'
+b = nil
+# Using safe operator...
+a&amp;.upcase
+# =&gt; HI!
+b&amp;.upcase
+# =&gt; nil
+</code></pre>
+
+<p>This operator comes with the objective to reduce <code>nil</code> verification in our code:</p>
+
+<pre><code class="language-ruby">if user &amp;&amp; user.avatar &amp;&amp; user.avatar.url
+  # ...
+end
+
+# Same code with &amp;. operator
+if user&amp;.avatar&amp;.url
+  # ...
+end
+</code></pre>
+
+<p>You can understand it as a native method equivalent to <code>try</code> included in <a href="https://github.com/rails/rails/tree/master/activesupport">ActiveSupport</a>.</p>
+
+<pre><code class="language-ruby">@variable&amp;.method
+# With ActiveSupport
+@variable.try(:method)
+</code></pre>
+
+<h1 id="nilnilnil">Nil nil nil</h1>
+
+<p>As people say in <a href="https://www.reddit.com/r/ruby/comments/3pr2gw/new_safe_navigation_operator/cw90huh">reddit</a>, excessive use of <code>nil</code> checking can come from a bad code design. <code>nil</code> dependency in our application is a bad idea because we always need to carry this verification over all the code, conditionals and <code>nil?</code> will be our best friends.</p>
+
+<p>In the other hands, other people defend "nil pattern". Some gems like <a href="https://github.com/raganwald/andand">andand</a> implement a similar functionality of <code>&amp;.</code>.</p>
+
+<p>I think the big problem is the abuse of this operator. There are many situations it very useful, for example, when working with external libraries and APIs.</p>
+
+<blockquote>
+  <p>It has an elegant syntax that is natural to read and easy to write</p>
+</blockquote>
+
+<p>This is an extract from Ruby slogan we can apply to <code>&amp;.</code> operator:</p>
+
+<pre><code class="language-ruby">json['errors'].map { |el| el['name'] } if json['errors']
+# With new operator
+json['errors']&amp;.map { |el| el['name'] }
+</code></pre>
+
+<p><code>&amp;.</code> is easy to read and simplify the code of our applications.</p>
+
+<h2 id="returnedvalues">Returned values</h2>
+
+<pre><code class="language-ruby">class MyString
+  def emphasize(string)
+     string&amp;.upcase
+  end
+end
+
+# In other file...
+my_string&amp;.emphasize(a_string)
+# nil
+</code></pre>
+
+<p>The result of this code is <code>nil</code> but, where <code>nil</code> value comes? In this case <code>my_string</code> can be <code>nil</code>, but <code>a_string</code> can be too. <code>&amp;.</code> hides some logic of our code, so to use these variables in the following code can cause some problems.</p>
+
+<h2 id="nilobject">Nil Object</h2>
+
+<p>In Ruby all is an Object and <code>nil</code> is not an exception. Some methods  from Object class like <code>.nil?</code> get on with <code>&amp;.</code> operator, and this can be a problem in our code logic:</p>
+
+<p>Sometimes I see <code>.nil?</code> in conditionals to initialize a variable:</p>
+
+<pre><code class="language-ruby">@var = 'A variable' if @var.nil?
+</code></pre>
+
+<p>But what happen if we use  <code>&amp;.</code> operator?</p>
+
+<pre><code class="language-ruby">@var = 'A variable' if @var&amp;.nil?
+</code></pre>
+
+<p>It's simple, <code>@var</code> never be initialized. You can tell me this is obvious, but it can be confused to new users of Ruby. Remember <code>nil</code> is not an exception of <code>&amp;.</code> operator.</p>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p><code>&amp;.</code> help us to keep cleaner our code but it can introduce some problems because the abuse of it hides some logic of our application. Especially, pay attention when you use <code>nil</code> as value in conditionals logic, <code>&amp;.</code> operator can swap executed code.</p>
+    </section>
+
+    <section class="post-share">
+      <h4>gem share <span class="share-title">Ruby safe operator</span>.gem</h4>
+      <div class="social">
+        <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Ruby%20safe%20operator&amp;url=http://irb.rocks/ruby-safe-operator/"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <span class="hidden">Twitter</span>
+        </a>
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://irb.rocks/ruby-safe-operator/"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+        </a>
+        <a class="icon-googleplus" href="https://plus.google.com/share?url=http://irb.rocks/ruby-safe-operator/"
+        onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="post-footer">
+        <section class="post-author">
+          <p class="comment"># puts "This was an article of <a href="../author/angel/">Angel M</a>"</p>
+        </section>
+      <p class="comment"># next</p>
+
+      <section class="post-other-articles clearfix">
+          <div class="post-other">
+            <h2><a href="../update-timestamp-of-a-model-rails/">Update timestamp of a model in Rails</a> <time datetime="2015-11-14"><b>#</b> next</h2>
+          </div>
+          <div class="post-other">
+            <h2><a href="../multiple-assignments-in-ruby/">Multiple assignment in Ruby</a> <time datetime="2015-10-19"><b>#</b> previous</h2>
+          </div>
+      </section>
+
+    </div>
+  </article>
+
+</main>
+
+<script type="text/javascript">
+// Update the name of the "gem" :P
+$(document).ready(function(){
+  var share = $('.share-title');
+  share.text(share.text().toLowerCase().replace(/\s/g, '_'));
+});
+</script>
+
+
+    <footer class="footer">
+  <div class="ruby-icon">
+    <img src="../assets/images/ruby.png%3Fv=cf909d7305"/>
+  </div>
+  <section class="credits">
+    <a href="../">IRB Rocks!</a> &copy; 2017. <a href="https://github.com/irbrocks/theme">Open Source Theme</a></section>
+  </section>
+  <section class="social">
+    <a href="https://twitter.com/irbrocks" target="_blank">Twitter</a> /
+    <a href="https://github.com/irbrocks" target="_blank">Github</a> /
+    <a href="https://es.linkedin.com/pub/ángel-maría-de-miguel-meana/60/974/9b6
+" target="_blank">Linkedin</a>
+  </section>
+</footer>  </div>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47913999-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  <script type="text/javascript" src="../assets/js/irb.rocks.js%3Fv=cf909d7305"></script>
+  <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

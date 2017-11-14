@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>Living outside Rails</title>
+  <meta name="description" content="Frameworks are powerful tools to develop software. However, they are dangerous. We get used to his methods... This article enumerate common Rails methods" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="shortcut icon" href="../assets/images/favicon.ico%3Fv=cf909d7305">
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="../assets/images/apple-touch-icon-57x57.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/images/apple-touch-icon-114x114.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/images/apple-touch-icon-72x72.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/images/apple-touch-icon-144x144.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="../assets/images/apple-touch-icon-60x60.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../assets/images/apple-touch-icon-120x120.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../assets/images/apple-touch-icon-76x76.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../assets/images/apple-touch-icon-152x152.png%3Fv=cf909d7305" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-196x196.png%3Fv=cf909d7305" sizes="196x196" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-96x96.png%3Fv=cf909d7305" sizes="96x96" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-32x32.png%3Fv=cf909d7305" sizes="32x32" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-16x16.png%3Fv=cf909d7305" sizes="16x16" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-128.png%3Fv=cf909d7305" sizes="128x128" />
+
+  <link rel="stylesheet" type="text/css" href="../assets/css/irb.rocks.min.css%3Fv=cf909d7305.css" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,700,400|PT+Serif" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/zenburn.css%3Fv=cf909d7305.css" />
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="../assets/js/highlight.pack.js%3Fv=cf909d7305"></script>
+
+  <link rel="canonical" href="" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/" />
+
+    <meta property="og:site_name" content="IRB Rocks!" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Living outside Rails" />
+    <meta property="og:description" content="Frameworks are powerful tools to develop software. However, they are dangerous. We get used to his methods... This article enumerate common Rails methods" />
+    <meta property="og:url" content="http://irb.rocks/living-outside-rails/" />
+    <meta property="og:image" content="http://irb.rocks/content/images/2015/08/living-outside-rails-1.png" />
+    <meta property="article:published_time" content="2015-08-01T15:16:52.000Z" />
+    <meta property="article:modified_time" content="2015-10-25T12:43:07.000Z" />
+    <meta property="article:tag" content="Ruby" />
+    <meta property="article:tag" content="Rails" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Living outside Rails" />
+    <meta name="twitter:description" content="Frameworks are powerful tools to develop software. However, they are dangerous. We get used to his methods... This article enumerate common Rails methods" />
+    <meta name="twitter:url" content="http://irb.rocks/living-outside-rails/" />
+    <meta name="twitter:image" content="http://irb.rocks/content/images/2015/08/living-outside-rails-1.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Angel M" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Ruby, Rails" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "IRB Rocks!",
+        "logo": "http://irb.rocks/content/images/2016/04/irbrocks-1.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Angel M",
+        "image": "//www.gravatar.com/avatar/73f55f92af57327a909da02fd88ac4d0?s=250&d=mm&r=x",
+        "url": "http://irb.rocks/author/angel/",
+        "sameAs": [],
+        "description": "I&#x27;m Ángel. UX newbie, I write about that on laux. I&#x27;m developing a lot of projects in my spare time. In my work, I make awesome things at Bitnami ;)"
+    },
+    "headline": "Living outside Rails",
+    "url": "http://irb.rocks/living-outside-rails/",
+    "datePublished": "2015-08-01T15:16:52.000Z",
+    "dateModified": "2015-10-25T12:43:07.000Z",
+    "image": "http://irb.rocks/content/images/2015/08/living-outside-rails-1.png",
+    "keywords": "Ruby, Rails",
+    "description": "Frameworks are powerful tools to develop software. However, they are dangerous. We get used to his methods... This article enumerate common Rails methods",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://irb.rocks"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.11" />
+    <link rel="alternate" type="application/rss+xml" title="IRB Rocks!" href="../rss/" />
+</head>
+<body class="post-template tag-ruby tag-rails nav-closed">
+  <header class="clearfix">
+      <div class="blog-logo">
+        <a href="../">
+          <img src="../content/images/2016/04/irbrocks-1.png" alt="IRB Rocks!" />
+        </a>
+      </div>
+    <div class="blog-info">
+      <h1 class="blog-title"><a href="../">IRB Rocks!</a></h1>
+      <h2 class="blog-description"># Hack your code</h2>
+    </div>
+    <ul class="nav">
+    <li class="nav-home" role="presentation"><a href="../">Home</a></li>
+</ul>
+  </header>
+  <div class="wrapper">
+
+<main id="content" class="content post-content" role="main">
+  <article class="post post tag-ruby tag-rails">
+    <div class="post-header">
+      <h1 class="post-title">Living outside Rails</h1>
+      <section class="post-meta">
+        # <time class="post-date" datetime="2015-08-01">01 August 2015</time>  on <a href="../tag/ruby/">Ruby</a>, <a href="../tag/rails/">Rails</a>
+      </section>
+    </div>
+
+    <section class="post-content">
+        <p><img src="../content/images/2015/08/living-outside-rails-1.png" alt="Post image"/></p>
+      <p>Frameworks are powerful tools to develop software. However, they are dangerous. We get used to his classes, methods... and <strong>take them as property of the programming language they are written</strong>.</p>
+
+<p>Rails isn't an exception. <strong>Welcome to the life outside Rails</strong>.</p>
+
+<h1 id="gems">Gems</h1>
+
+<p>When we are writing a gem, we must have in mind if it's for general purpose or it has Rails as dependency.</p>
+
+<p><strong>It's typical to write a gem for general purpose and work with it on a Rails environment</strong>. That's a big problem because people that use our gem on another environment will get a lot of exceptions.</p>
+
+<h1 id="activesupport">ActiveSupport</h1>
+
+<p><a href="https://github.com/rails/rails/tree/master/activesupport">ActiveSupport</a> is the responsible of utility classes and Ruby extensions. It's a gem so we can add it to non Rails projects, but I recommend you to add only functions you need.</p>
+
+<p>Common methods of Rails that <strong>don't exist in Ruby</strong> are listed next.</p>
+
+<h3 id="object">Object</h3>
+
+<ul>
+<li><code>present?</code>, <code>blank?</code></li>
+<li><code>as_json</code>, <code>to_json</code></li>
+<li><code>try</code></li>
+</ul>
+
+<p>From <a href="https://github.com/rails/rails/blob/master/activesupport/lib/active_support/core_ext/object">Object</a></p>
+
+<h3 id="array">Array</h3>
+
+<ul>
+<li><code>second</code>, <code>third</code>, <code>fourth</code>, <code>fifth</code></li>
+<li><code>to_xml</code></li>
+<li><code>split</code></li>
+</ul>
+
+<p>From <a href="https://github.com/rails/rails/tree/master/activesupport/lib/active_support/core_ext/array">Array</a>.</p>
+
+<h3 id="hash">Hash</h3>
+
+<ul>
+<li><code>compact</code></li>
+<li><code>to_xml</code>, <code>self.from_xml</code></li>
+<li><code>except</code></li>
+<li><code>symbolize_keys</code>, <code>stringify_keys</code></li>
+<li><code>slice</code></li>
+</ul>
+
+<p>From <a href="https://github.com/rails/rails/tree/master/activesupport/lib/active_support/core_ext/hash">Hash</a>.</p>
+
+<h3 id="integer">Integer</h3>
+
+<ul>
+<li><code>multiple_of?</code></li>
+</ul>
+
+<p>From <a href="https://github.com/rails/rails/tree/master/activesupport/lib/active_support/core_ext/integer">Integer</a>.</p>
+
+<h3 id="numeric">Numeric</h3>
+
+<ul>
+<li>Bytes methods: <code>self.bytes</code>, <code>self.kilobytes</code>...</li>
+<li>Time methods:  <code>self.seconds</code>, <code>self.minutes</code>, <code>self.hours</code>... (plus singular methods)</li>
+</ul>
+
+<p>From <a href="https://github.com/rails/rails/tree/master/activesupport/lib/active_support/core_ext/numeric">Numeric</a>.</p>
+
+<h3 id="string">String</h3>
+
+<ul>
+<li><code>first</code>, <code>last</code>, <code>at</code>, <code>from</code></li>
+<li><code>to_date</code>, <code>to_time</code>, <code>to_datetime</code></li>
+<li><code>remove</code></li>
+<li><code>truncate</code></li>
+<li><code>pluralize</code>, <code>singularize</code>, <code>constantize</code>, <code>camelize</code>, <code>humanize</code>, <code>demodulize</code></li>
+<li><code>html_escape</code></li>
+</ul>
+
+<p>From <a href="https://github.com/rails/rails/tree/master/activesupport/lib/active_support/core_ext/string">String</a>.</p>
+
+<h3 id="class">Class</h3>
+
+<ul>
+<li><code>mattr_reader</code>, <code>mattr_writer</code>, <code>mattr_accessor</code></li>
+</ul>
+
+<p>From <a href="https://github.com/rails/rails/tree/master/activesupport/lib/active_support/core_ext/class">Class</a>.</p>
+
+<h3 id="module">Module</h3>
+
+<ul>
+<li><code>alias_method_chain</code> (this method is deprecated)</li>
+<li><code>delegate</code></li>
+<li><code>deprecate</code></li>
+</ul>
+
+<p>From <a href="https://github.com/rails/rails/tree/master/activesupport/lib/active_support/core_ext/module">Module</a>.</p>
+
+<h3 id="date">Date</h3>
+
+<ul>
+<li><code>self.beginning_of_week</code>, <code>self.yesterday</code>, <code>self.tomorrow</code>, <code>self.current</code></li>
+<li><code>beginning_of_day</code>, <code>middle_of_day</code>, <code>end_of_day</code></li>
+<li><code>today?</code></li>
+</ul>
+
+<p>From <a href="https://github.com/rails/rails/tree/master/activesupport/lib/active_support/core_ext/date">Date</a>.</p>
+
+<h3 id="datetime">DateTime</h3>
+
+<ul>
+<li><code>self.current</code></li>
+<li><code>beginning_of_day</code>, <code>middle_of_day</code>, <code>end_of_day</code></li>
+<li><code>beginning_of_hour</code>, <code>end_of_hour</code>, <code>beginning_of_minute</code>, <code>end_of_minute</code></li>
+</ul>
+
+<p>From <a href="https://github.com/rails/rails/tree/master/activesupport/lib/active_support/core_ext/date_time">DateTime</a>.</p>
+
+<h3 id="time">Time</h3>
+
+<ul>
+<li><code>self.current</code></li>
+<li><code>beginning_of_day</code>, <code>middle_of_day</code>, <code>end_of_day</code></li>
+<li><code>beginning_of_hour</code>, <code>end_of_hour</code>, <code>beginning_of_minute</code>, <code>end_of_minute</code></li>
+<li><code>zone</code>, <code>use_zone</code></li>
+</ul>
+
+<p>From <a href="https://github.com/rails/rails/tree/master/activesupport/lib/active_support/core_ext/time">Time</a></p>
+    </section>
+
+    <section class="post-share">
+      <h4>gem share <span class="share-title">Living outside Rails</span>.gem</h4>
+      <div class="social">
+        <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Living%20outside%20Rails&amp;url=http://irb.rocks/living-outside-rails/"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <span class="hidden">Twitter</span>
+        </a>
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://irb.rocks/living-outside-rails/"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+        </a>
+        <a class="icon-googleplus" href="https://plus.google.com/share?url=http://irb.rocks/living-outside-rails/"
+        onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="post-footer">
+        <section class="post-author">
+          <p class="comment"># puts "This was an article of <a href="../author/angel/">Angel M</a>"</p>
+        </section>
+      <p class="comment"># next</p>
+
+      <section class="post-other-articles clearfix">
+          <div class="post-other">
+            <h2><a href="../ruby-fights/">Ruby fights!</a> <time datetime="2015-10-01"><b>#</b> next</h2>
+          </div>
+          <div class="post-other">
+            <h2><a href="../comparison-arrays-ruby/">Comparison of arrays in Ruby</a> <time datetime="2015-07-28"><b>#</b> previous</h2>
+          </div>
+      </section>
+
+    </div>
+  </article>
+
+</main>
+
+<script type="text/javascript">
+// Update the name of the "gem" :P
+$(document).ready(function(){
+  var share = $('.share-title');
+  share.text(share.text().toLowerCase().replace(/\s/g, '_'));
+});
+</script>
+
+
+    <footer class="footer">
+  <div class="ruby-icon">
+    <img src="../assets/images/ruby.png%3Fv=cf909d7305"/>
+  </div>
+  <section class="credits">
+    <a href="../">IRB Rocks!</a> &copy; 2017. <a href="https://github.com/irbrocks/theme">Open Source Theme</a></section>
+  </section>
+  <section class="social">
+    <a href="https://twitter.com/irbrocks" target="_blank">Twitter</a> /
+    <a href="https://github.com/irbrocks" target="_blank">Github</a> /
+    <a href="https://es.linkedin.com/pub/ángel-maría-de-miguel-meana/60/974/9b6
+" target="_blank">Linkedin</a>
+  </section>
+</footer>  </div>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47913999-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  <script type="text/javascript" src="../assets/js/irb.rocks.js%3Fv=cf909d7305"></script>
+  <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

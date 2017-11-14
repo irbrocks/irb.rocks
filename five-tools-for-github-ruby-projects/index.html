@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>Five tools for Github Ruby projects</title>
+  <meta name="description" content="" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="shortcut icon" href="../assets/images/favicon.ico%3Fv=cf909d7305">
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="../assets/images/apple-touch-icon-57x57.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/images/apple-touch-icon-114x114.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/images/apple-touch-icon-72x72.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/images/apple-touch-icon-144x144.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="../assets/images/apple-touch-icon-60x60.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../assets/images/apple-touch-icon-120x120.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../assets/images/apple-touch-icon-76x76.png%3Fv=cf909d7305" />
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../assets/images/apple-touch-icon-152x152.png%3Fv=cf909d7305" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-196x196.png%3Fv=cf909d7305" sizes="196x196" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-96x96.png%3Fv=cf909d7305" sizes="96x96" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-32x32.png%3Fv=cf909d7305" sizes="32x32" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-16x16.png%3Fv=cf909d7305" sizes="16x16" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon-128.png%3Fv=cf909d7305" sizes="128x128" />
+
+  <link rel="stylesheet" type="text/css" href="../assets/css/irb.rocks.min.css%3Fv=cf909d7305.css" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,700,400|PT+Serif" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/zenburn.css%3Fv=cf909d7305.css" />
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="../assets/js/highlight.pack.js%3Fv=cf909d7305"></script>
+
+  <link rel="canonical" href="" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/" />
+
+    <meta property="og:site_name" content="IRB Rocks!" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Five tools for Github Ruby projects" />
+    <meta property="og:description" content="Github starts as a project repository for teams. Now, it&#x27;s a social network for developers and a platform to share and collaborate on projects. Github, as its name says, it&#x27;s an hub for Git projects. If you don&#x27;t know Git, stop reading and learn it in 15 minutes. It&#x27;s the" />
+    <meta property="og:url" content="http://irb.rocks/five-tools-for-github-ruby-projects/" />
+    <meta property="article:published_time" content="2015-07-22T17:23:29.000Z" />
+    <meta property="article:modified_time" content="2015-08-01T15:28:45.000Z" />
+    <meta property="article:tag" content="Ruby" />
+    <meta property="article:tag" content="Rails" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Five tools for Github Ruby projects" />
+    <meta name="twitter:description" content="Github starts as a project repository for teams. Now, it&#x27;s a social network for developers and a platform to share and collaborate on projects. Github, as its name says, it&#x27;s an hub for Git projects. If you don&#x27;t know Git, stop reading and learn it in 15 minutes. It&#x27;s the" />
+    <meta name="twitter:url" content="http://irb.rocks/five-tools-for-github-ruby-projects/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Angel M" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Ruby, Rails" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "IRB Rocks!",
+        "logo": "http://irb.rocks/content/images/2016/04/irbrocks-1.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Angel M",
+        "image": "//www.gravatar.com/avatar/73f55f92af57327a909da02fd88ac4d0?s=250&d=mm&r=x",
+        "url": "http://irb.rocks/author/angel/",
+        "sameAs": [],
+        "description": "I&#x27;m Ángel. UX newbie, I write about that on laux. I&#x27;m developing a lot of projects in my spare time. In my work, I make awesome things at Bitnami ;)"
+    },
+    "headline": "Five tools for Github Ruby projects",
+    "url": "http://irb.rocks/five-tools-for-github-ruby-projects/",
+    "datePublished": "2015-07-22T17:23:29.000Z",
+    "dateModified": "2015-08-01T15:28:45.000Z",
+    "keywords": "Ruby, Rails",
+    "description": "Github starts as a project repository for teams. Now, it&#x27;s a social network for developers and a platform to share and collaborate on projects. Github, as its name says, it&#x27;s an hub for Git projects. If you don&#x27;t know Git, stop reading and learn it in 15 minutes. It&#x27;s the",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://irb.rocks"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.11" />
+    <link rel="alternate" type="application/rss+xml" title="IRB Rocks!" href="../rss/" />
+</head>
+<body class="post-template tag-ruby tag-rails nav-closed">
+  <header class="clearfix">
+      <div class="blog-logo">
+        <a href="../">
+          <img src="../content/images/2016/04/irbrocks-1.png" alt="IRB Rocks!" />
+        </a>
+      </div>
+    <div class="blog-info">
+      <h1 class="blog-title"><a href="../">IRB Rocks!</a></h1>
+      <h2 class="blog-description"># Hack your code</h2>
+    </div>
+    <ul class="nav">
+    <li class="nav-home" role="presentation"><a href="../">Home</a></li>
+</ul>
+  </header>
+  <div class="wrapper">
+
+<main id="content" class="content post-content" role="main">
+  <article class="post post tag-ruby tag-rails">
+    <div class="post-header">
+      <h1 class="post-title">Five tools for Github Ruby projects</h1>
+      <section class="post-meta">
+        # <time class="post-date" datetime="2015-07-22">22 July 2015</time>  on <a href="../tag/ruby/">Ruby</a>, <a href="../tag/rails/">Rails</a>
+      </section>
+    </div>
+
+    <section class="post-content">
+      <p><a href="https://github.com">Github</a> starts as a project repository for teams. Now, it's a social network for developers and a platform to share and collaborate on projects.</p>
+
+<p>Github, as its name says, it's an hub for Git projects. If you don't know Git, stop reading and <a href="https://try.github.io/">learn it in 15 minutes</a>. It's the tool changes my coder life.</p>
+
+<h1 id="tools">Tools</h1>
+
+<p>Do you remember any badge on a Github repository? (see my <a href="https://github.com/Angelmmiguel/material_icons">Material Icon gem</a> for an example) There are a lot of tools to integrate in your <strong>Ruby/Rails projects</strong>. In addition, some of them can be extended to other languages. </p>
+
+<p>Some tools are paying services, but <strong>usually they are free for Open Source projects</strong>. Congratulations! Open your projects to collaborate has a prize (and not only one).</p>
+
+<h2 id="travisci">Travis CI</h2>
+
+<p><img src="../content/images/2015/07/travis-ci-1.jpg" alt="Travis CI" /></p>
+
+<p>Testing is a very important stage of project development. <strong>It's the reason I go calm to home</strong>. But we must have in mind following idea:</p>
+
+<blockquote>
+  <p>Write tests is for humans and run them is for computers.</p>
+</blockquote>
+
+<p><a href="https://travis-ci.org/">Travis CI</a> perform the second job. Travis syncs Github projects and run tests when exist a new pull request or commit.</p>
+
+<p>You can set multiple Ruby versions, install scripts, run sudo commands, set environment variables... everything you need to simulate a real context. If build fails, Travis will advice you.</p>
+
+<h2 id="coveralls">Coveralls</h2>
+
+<p><img src="../content/images/2015/07/coveralls-1-1.png" alt="Coveralls social" /></p>
+
+<p><a href="https://coveralls.io/">Coveralls</a> is a good tool to integrate with Travis CI. <strong>It reports you about the coverage of your tests</strong>. It means the number of relevant lines your tests cover.</p>
+
+<blockquote>
+  <p>The key of testing is to cover all important parts of your code.</p>
+</blockquote>
+
+<h2 id="codeclimate">Code climate</h2>
+
+<p>Do you deal with a bad code? Spend hours to understand it, unused classes and variables, memory leaks...</p>
+
+<p><a href="https://codeclimate.com">Code climate</a> <strong>prevents us about bad practices in our code</strong>. It doesn't need any installation. Only login with your Github account and select the repo to inspect, a list of issues will appear after finish.</p>
+
+<h2 id="hakiri">Hakiri</h2>
+
+<p>I know is difficult to secure our Ruby code. <strong>Every day, bugs are discovered</strong> and our apps are a combination of libraries (gems) and our code.</p>
+
+<p><a href="https://hakiri.io/">Hakiri</a> helps us to keep safe our apps. It checks our code to find known bugs or bad practices and dependencies like gems.</p>
+
+<h2 id="inchci">Inch CI</h2>
+
+<blockquote>
+  <p>- hi Angel</p>
+
+  <p>- Hello.</p>
+
+  <p>- I have seen on Git blame you wrote this code last month. What does mean "div" variable?</p>
+
+  <p>- Emm... div...ision?</p>
+</blockquote>
+
+<p>If you think comments are unnecessary, remember please, <strong>you aren't a computer. We write a lot of lines, and of course, we will forget minor details</strong>. I recommend you to comment all projects even you are working alone.</p>
+
+<p>A bad comment doesn't provide any new information:</p>
+
+<pre><code class="language-ruby"># Iterate over elements
+items.each do |item|
+# ...
+end
+</code></pre>
+
+<p>A good comment includes extra information you can't read in code:</p>
+
+<pre><code class="language-ruby"># Format items to graph.js library
+items.each do |item|
+# ...
+end
+</code></pre>
+
+<p><a href="http://inch-ci.org/">Inch CI</a> is an interesting tool to be aware of how are our code is commented. It scans a repository and give us a mark for our project files.</p>
+
+<h2 id="gemnasiumbonustoolfromreddithttpswwwredditcomrrubycomments3er2ndfive_tools_for_your_github_ruby_projects">Gemnasium (bonus tool from <a href="https://www.reddit.com/r/ruby/comments/3er2nd/five_tools_for_your_github_ruby_projects/">reddit</a>)</h2>
+
+<p><a href="https://gemnasium.com/">Gemnasium</a> is the best inspector for your project dependencies. It's complements hakiri due to it checks status of gems versions. Obsolete dependencies will set as "dangerous", and if they present some CVE it will turn to critical.</p>
+    </section>
+
+    <section class="post-share">
+      <h4>gem share <span class="share-title">Five tools for Github Ruby projects</span>.gem</h4>
+      <div class="social">
+        <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Five%20tools%20for%20Github%20Ruby%20projects&amp;url=http://irb.rocks/five-tools-for-github-ruby-projects/"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <span class="hidden">Twitter</span>
+        </a>
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://irb.rocks/five-tools-for-github-ruby-projects/"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+        </a>
+        <a class="icon-googleplus" href="https://plus.google.com/share?url=http://irb.rocks/five-tools-for-github-ruby-projects/"
+        onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="post-footer">
+        <section class="post-author">
+          <p class="comment"># puts "This was an article of <a href="../author/angel/">Angel M</a>"</p>
+        </section>
+      <p class="comment"># next</p>
+
+      <section class="post-other-articles clearfix">
+          <div class="post-other">
+            <h2><a href="../colorize-rails-unit-tests/">Colorize Rails unit tests</a> <time datetime="2015-07-23"><b>#</b> next</h2>
+          </div>
+          <div class="post-other">
+            <h2><a href="../hi_world-rb/">hi_world.rb</a> <time datetime="2015-07-22"><b>#</b> previous</h2>
+          </div>
+      </section>
+
+    </div>
+  </article>
+
+</main>
+
+<script type="text/javascript">
+// Update the name of the "gem" :P
+$(document).ready(function(){
+  var share = $('.share-title');
+  share.text(share.text().toLowerCase().replace(/\s/g, '_'));
+});
+</script>
+
+
+    <footer class="footer">
+  <div class="ruby-icon">
+    <img src="../assets/images/ruby.png%3Fv=cf909d7305"/>
+  </div>
+  <section class="credits">
+    <a href="../">IRB Rocks!</a> &copy; 2017. <a href="https://github.com/irbrocks/theme">Open Source Theme</a></section>
+  </section>
+  <section class="social">
+    <a href="https://twitter.com/irbrocks" target="_blank">Twitter</a> /
+    <a href="https://github.com/irbrocks" target="_blank">Github</a> /
+    <a href="https://es.linkedin.com/pub/ángel-maría-de-miguel-meana/60/974/9b6
+" target="_blank">Linkedin</a>
+  </section>
+</footer>  </div>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47913999-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  <script type="text/javascript" src="../assets/js/irb.rocks.js%3Fv=cf909d7305"></script>
+  <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
